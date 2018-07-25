@@ -6,32 +6,9 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/rlNativeAd"
+        android:id="@+id/rl_player"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true">
-
-        <FrameLayout
-            android:id="@+id/fl_adplaceholder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
-
-        <!--<com.google.android.gms.ads.NativeExpressAdView-->
-            <!--android:id="@+id/adView"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--ads:adSize="320x300"-->
-            <!--ads:adUnitId="@string/ad_unit_id_smart_banners" />-->
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_height="wrap_content">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/button1"
@@ -64,6 +41,28 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/button1"
             android:layout_toRightOf="@+id/button1" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/rl_player">
+
+        <FrameLayout
+            android:id="@+id/fl_adplaceholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="@string/ad_unit_id_smart_banners" />
+
     </RelativeLayout>
 
 </RelativeLayout>

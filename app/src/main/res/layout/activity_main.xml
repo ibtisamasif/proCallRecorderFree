@@ -35,9 +35,7 @@
                 app:tabIndicatorHeight="5dp"
                 app:tabTextAppearance="@style/TextAppearance.Design.Tab"
                 app:tabTextColor="@color/icons" />
-            <!--app:tabSelectedTextColor="@color/secondary_text"-->
         </android.support.design.widget.AppBarLayout>
-
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
@@ -58,7 +56,6 @@
             ads:adUnitId="@string/ad_unit_id_smart_banners" />
     </RelativeLayout>
 
-
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -75,20 +72,6 @@
         <include layout="@layout/nav_header" />
 
     </android.support.design.widget.NavigationView>
-
-    <!--<android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:clickable="true"
-        android:fitsSystemWindows="true"
-        android:focusable="true"
-        app:elevation="3dp"
-        app:headerLayout="@layout/nav_header"
-        app:itemBackground="@drawable/custom_bg"
-        app:menu="@menu/activity_navigation_drawer" />-->
-
 
 </android.support.v4.widget.DrawerLayout>
 
