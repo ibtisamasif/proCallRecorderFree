@@ -22,8 +22,8 @@ android {
         applicationId "com.callrecorder.freecallrecorder"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 11   //11 is in production
-        versionName '1.7' //1.7 is in production
+        versionCode 12   //12 is in production
+        versionName '1.8' //1.8 is in production
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
