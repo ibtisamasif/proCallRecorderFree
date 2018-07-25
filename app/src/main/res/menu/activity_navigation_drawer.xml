@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?><!--<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="Select Option">-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fav"
+        android:icon="@drawable/favorite"
+        android:title="Favourites" />
+    <item
+        android:id="@+id/contact"
+        android:icon="@drawable/ic_contacts_black_24dp"
+        android:title="Sync Contact"
+        android:visible="false"/>
+    <item
+        android:id="@+id/recording_issue"
+        android:icon="@drawable/ic_error_black_24dp"
+        android:title="Recording Issue" />
+    <item
+        android:id="@+id/pin_lock"
+        android:icon="@drawable/ic_005_keyhole"
+        android:title="Pin Lock" />
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="Settings" />
+    <item
+        android:id="@+id/nav_faq"
+        android:icon="@drawable/ic_faq"
+        android:title="@string/navigation_drawer_faq" />
+    <item
+        android:id="@+id/nav_share"
+        android:icon="@drawable/ic_002_share"
+        android:title="Share" />
+    <item
+        android:id="@+id/nav_upgrade"
+        android:icon="@drawable/ic_action_playstore"
+        android:title="Upgrade to Pro" />
+    <item
+        android:id="@+id/rate_us"
+        android:icon="@drawable/ic_001_rating"
+        android:title="Rate Us" />
+</menu><!--   </item>
+</menu>
+-->

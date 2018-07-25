@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.callrecorder.free">
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon,android:theme">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.callrecorder.freecallrecorder.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <!-- <meta-data -->
+        <!-- android:name="com.facebook.sdk.ApplicationId" -->
+        <!-- android:value="@string/facebook_app_id" /> -->
+
+
+        <!-- <provider -->
+        <!-- android:name="com.facebook.FacebookContentProvider" -->
+        <!-- android:authorities="com.facebook.app.FacebookContentProvider146218856101206" -->
+        <!-- android:exported="true" /> -->
+
+        <activity
+            android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name="lvc.pro.com.free.MainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:resource="@xml/searchable"
+                android:value=".SearchResultsActivity" />
+        </activity>
+        <activity
+            android:name="lvc.pro.com.free.Favourite"
+            android:parentActivityName="lvc.pro.com.free.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="lvc.pro.com.free.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingTheme" />
+        <activity
+            android:name="lvc.pro.com.free.SearchResultsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="lvc.pro.com.free.ListenActivity"
+            android:label="Listen Records"
+            android:parentActivityName="lvc.pro.com.free.Favourite"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="lvc.pro.com.free.Splash_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="lvc.pro.com.free.Recording_issue"
+            android:parentActivityName="lvc.pro.com.free.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
+            android:name="lvc.pro.com.free.Main2Activity"
+            android:label="Playing"
+            android:screenOrientation="portrait"
+            android:theme="@style/mytheme" />
+        <activity android:name="lvc.pro.com.free.NewPinLock" />
+
+        <receiver android:name="lvc.pro.com.free.receivers.NetworkStateReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- <receiver -->
+        <!-- android:name="lvc.pro.com.app1.BroadcastReciver.ExtendedReciver" -->
+        <!-- android:enabled="true" -->
+        <!-- android:exported="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.PHONE_STATE" /> -->
+        <!-- <action android:name="android.intent.action.NEW_OUTGOING_CALL" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+
+        <receiver android:name="lvc.pro.com.free.receivers.RestartServiceReceiver">
+            <intent-filter>
+                <action android:name="YouWillNeverKillMe" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="lvc.pro.com.free.service.CallDetectionService"
+            android:enabled="true"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:stopWithTask="false">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="inez.apps.customincomingcallscreen.MyService" /> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- </intent-filter> -->
+        </service>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="cfc67a07b87045dfd902fad7b1bf796b642fce33" />
+
+        <activity
+            android:name="lvc.pro.com.free.FAQActivity"
+            android:label="@string/title_activity_faq"
+            android:theme="@style/AppTheme"></activity>
+    </application>
+
+</manifest>
