@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -16,10 +15,7 @@ import com.andrognito.pinlockview.PinLockListener;
 import com.andrognito.pinlockview.PinLockView;
 import com.chaos.view.PinView;
 
-import java.util.concurrent.CompletionService;
-
 import lvc.pro.com.free.constants.Constants;
-import lvc.pro.com.free.utility.CommonUtility;
 import lvc.pro.com.free.utility.SharedPreferenceUtility;
 
 public class NewPinLock extends AppCompatActivity {

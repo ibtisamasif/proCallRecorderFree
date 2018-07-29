@@ -269,7 +269,7 @@ public class IncommingAdapter extends RecyclerView.Adapter {
     }
 
     public ArrayList<Object> selectAll() {
-        selectedContactsTimeStamps=new ArrayList<>();
+        selectedContactsTimeStamps = new ArrayList<>();
         for (int i = 0; i < contacts.size(); i++) {
             if (contacts.get(i) instanceof Contacts) {
                 selectedContactsTimeStamps.add(((Contacts) contacts.get(i)).getTimestamp());

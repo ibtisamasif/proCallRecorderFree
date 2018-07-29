@@ -1,9 +1,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <SwitchPreference
+        android:id="@+id/switch_pref_pin_lock"
         android:defaultValue="false"
         android:key="LOCK"
         android:summary="Enable Pin Lock "
-        android:id="@+id/switch_pref_pin_lock"
         android:title="Pin Lock" />
 
     <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to

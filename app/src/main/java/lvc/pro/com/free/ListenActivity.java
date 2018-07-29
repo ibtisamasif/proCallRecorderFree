@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 import lvc.pro.com.free.constants.Constants;
 import lvc.pro.com.free.contacts.ContactProvider;
-import lvc.pro.com.free.utility.CommonUtility;
 import lvc.pro.com.free.utility.SharedPreferenceUtility;
 
 public class ListenActivity extends AppCompatActivity {

@@ -243,7 +243,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
     public void setSelectedContactsTimeStamps(List<Object> selectedContactsTimeStamps) {
         this.selectedContactsTimeStamps = (ArrayList<Object>) selectedContactsTimeStamps;
         notifyDataSetChanged();
-        Log.d("list adap size",""+this.selectedContactsTimeStamps.size());
+        Log.d("list adap size", "" + this.selectedContactsTimeStamps.size());
     }
 
     public void setListener(RecyclerAdapter.OnitemClickListener listener) {
@@ -267,8 +267,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
             return null;
         }
     }
+
     public ArrayList<Object> selectAll() {
-        selectedContactsTimeStamps=new ArrayList<>();
+        selectedContactsTimeStamps = new ArrayList<>();
         for (int i = 0; i < contacts.size(); i++) {
             if (contacts.get(i) instanceof Contacts) {
                 selectedContactsTimeStamps.add(((Contacts) contacts.get(i)).getTimestamp());

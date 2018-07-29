@@ -312,8 +312,8 @@ public class Incomming extends Fragment implements MainActivity.refreshstener, A
         if (!recordedContacts.isEmpty()) {
             recordedContacts.clear();
         }
-       //crash recordedContacts = ContactProvider.getCallList(getContext(), recordings, "IN");
-        if(getContext()!=null) {
+        //crash recordedContacts = ContactProvider.getCallList(getContext(), recordings, "IN");
+        if (getContext() != null) {
             recordedContacts = ContactProvider.getCallList(getContext(), recordings, "IN");
         }
 //        Log.d(TAG, "showContacts: recordedContacts: " + recordedContacts);
@@ -572,8 +572,8 @@ public class Incomming extends Fragment implements MainActivity.refreshstener, A
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(" FRAGMENT "+Incomming.class.getSimpleName()," refresh ");
-       refreshItems();
+        Log.d(" FRAGMENT " + Incomming.class.getSimpleName(), " refresh ");
+        refreshItems();
     }
 
     @Override

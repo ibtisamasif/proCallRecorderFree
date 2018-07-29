@@ -25,7 +25,6 @@ import lvc.pro.com.free.SqliteDatabase.DatabaseHelper;
 import lvc.pro.com.free.adapter.FavouriteAdapter;
 import lvc.pro.com.free.constants.Constants;
 import lvc.pro.com.free.pojo_classes.Contacts;
-import lvc.pro.com.free.utility.CommonUtility;
 import lvc.pro.com.free.utility.SharedPreferenceUtility;
 import lvc.pro.com.free.utils.StringUtils;
 
@@ -40,7 +39,7 @@ public class Favourite extends AppCompatActivity {
     ArrayList<Contacts> realContacts = new ArrayList<>();
     private AdView mAdView;
     LinearLayout message;
-    public static boolean mIsDestroying=false;
+    public static boolean mIsDestroying = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -102,7 +101,7 @@ public class Favourite extends AppCompatActivity {
             @Override
             public void onClick(View v, int position) {
                 Constants.sIS_FROM_ANOTHER_ACTIVITY = true;
-                Constants.sFROM_FAV_TO_LISTEN=true;
+                Constants.sFROM_FAV_TO_LISTEN = true;
                 Intent intent = new Intent(v.getContext(), ListenActivity.class);
                 intent.putExtra("NUMBER", StringUtils.prepareContacts(getApplicationContext(), realContacts.get(position).getNumber()));
                 startActivity(intent);
@@ -113,13 +112,12 @@ public class Favourite extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(" 22222222222222"+Favourite.class.getSimpleName()," on pause Favourite");
-        mIsDestroying=true;
+        Log.d(" 22222222222222" + Favourite.class.getSimpleName(), " on pause Favourite");
+        mIsDestroying = true;
         SharedPreferenceUtility.setBackgroundStatus(getApplicationContext(), true);
-        if(ListenActivity.mIsDestroying)
-        {
-            Constants.sIS_FROM_ANOTHER_ACTIVITY=false;
-            ListenActivity.mIsDestroying=false;
+        if (ListenActivity.mIsDestroying) {
+            Constants.sIS_FROM_ANOTHER_ACTIVITY = false;
+            ListenActivity.mIsDestroying = false;
         }
     }
 
@@ -127,7 +125,7 @@ public class Favourite extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d(Favourite.class.getSimpleName(), SharedPreferenceUtility.getBackgroundStatus(getApplicationContext()) + " " + Constants.sIS_FROM_ANOTHER_ACTIVITY);
-        if(!ListenActivity.mIsDestroying) {
+        if (!ListenActivity.mIsDestroying) {
 
             if (SharedPreferenceUtility.getLockActivatedStatus(getApplicationContext())) {
                 if ((SharedPreferenceUtility.getBackgroundStatus(getApplicationContext()))
@@ -139,14 +137,14 @@ public class Favourite extends AppCompatActivity {
             }
         }
         Constants.sIS_FROM_ANOTHER_ACTIVITY = false;
-        mIsDestroying=false;
+        mIsDestroying = false;
         Log.d(Favourite.class.getSimpleName(), SharedPreferenceUtility.getBackgroundStatus(getApplicationContext()) + " " + Constants.sIS_FROM_ANOTHER_ACTIVITY);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-       // mIsDestroying=false;
+        // mIsDestroying=false;
         Constants.sIS_FROM_ANOTHER_ACTIVITY = true;
         SharedPreferenceUtility.setBackgroundStatus(getApplicationContext(), false);
 

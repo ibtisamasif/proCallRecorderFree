@@ -13,13 +13,12 @@ import com.google.android.gms.ads.AdView;
 import com.jaredrummler.android.device.DeviceName;
 
 import lvc.pro.com.free.constants.Constants;
-import lvc.pro.com.free.utility.CommonUtility;
 import lvc.pro.com.free.utility.SharedPreferenceUtility;
 import lvc.pro.com.free.utils.HuaweiProtectedAppsModule;
 
 public class Recording_issue extends AppCompatActivity {
     private AdView mAdView;
-    public static boolean mIsDestroying=false;
+    public static boolean mIsDestroying = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,7 @@ public class Recording_issue extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        mIsDestroying=true;
+        mIsDestroying = true;
         SharedPreferenceUtility.setBackgroundStatus(getApplicationContext(), true);
     }
 
@@ -59,7 +58,7 @@ public class Recording_issue extends AppCompatActivity {
             }
         }
         Constants.sIS_FROM_ANOTHER_ACTIVITY = false;
-        mIsDestroying=false;
+        mIsDestroying = false;
     }
 
     @Override

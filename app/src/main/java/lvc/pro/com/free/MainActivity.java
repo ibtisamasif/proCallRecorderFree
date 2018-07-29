@@ -1,7 +1,6 @@
 package lvc.pro.com.free;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
@@ -16,9 +15,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -30,7 +27,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -39,11 +35,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -68,7 +62,6 @@ import lvc.pro.com.free.fragments.Incomming;
 import lvc.pro.com.free.fragments.Outgoing;
 import lvc.pro.com.free.pojo_classes.Contacts;
 import lvc.pro.com.free.service.CallDetectionService;
-import lvc.pro.com.free.utility.CommonUtility;
 import lvc.pro.com.free.utility.SharedPreferenceUtility;
 import lvc.pro.com.free.utils.StringUtils;
 
@@ -280,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        recordingNameList = ContactProvider.showAllRecordedlistfiles(MainActivity.this);
 //        Log.d(TAG, "deleteRecordingsGreaterThan300: unarrangRecordingFileNameList: " + recordingNameList.toString());
 //
-//        //TODO arrange recording list from new to old. (3222220013__1515703409__IN__2-1223928264.3gpp, 3222220013__1515589108__IN__2-1223928264.3gpp, __1515589904__OUT__2-1223928264.3gpp)
+//        // arrange recording list from new to old. (3222220013__1515703409__IN__2-1223928264.3gpp, 3222220013__1515589108__IN__2-1223928264.3gpp, __1515589904__OUT__2-1223928264.3gpp)
 //
 ////        for (String oneRecordingFileName : sorts(recordingNameList)) {
 ////            arrangedRecordingFileNameList.add(oneRecordingFileName);
@@ -686,8 +679,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected void onPostExecute(ArrayList<Contacts> contactses) {
             refreshlistenerobj.refresh(true);
-            if(allFragment.isAdded())
-            {
+            if (allFragment.isAdded()) {
                 allFragment.refresh(true);
             }
 

@@ -7,7 +7,7 @@ public class StringUtils {
         if (number != null && !number.isEmpty()) {
             String preparednumbers = number.trim();
             preparednumbers = "#" + preparednumbers;
-           // preparednumbers = preparednumbers.replace("#0", "");
+            // preparednumbers = preparednumbers.replace("#0", "");
             preparednumbers = preparednumbers.replace("#", "");
             preparednumbers = preparednumbers.replace(" ", "");
             preparednumbers = preparednumbers.replace("(", "");

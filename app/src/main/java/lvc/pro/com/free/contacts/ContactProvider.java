@@ -596,7 +596,7 @@ public class ContactProvider {
             public void onClick(View v) {
 //                Toast.makeText(v.getContext(),position, Toast.LENGTH_SHORT).show();
                 Constants.sIS_FROM_ANOTHER_ACTIVITY = true;
-                Constants.sFROM_MAIN_TO_ACTIVITY=true;
+                Constants.sFROM_MAIN_TO_ACTIVITY = true;
                 playmusic(v.getContext(), getFolderPath(v.getContext()) + "/" + recording, recording);
                 dialog.dismiss();
             }

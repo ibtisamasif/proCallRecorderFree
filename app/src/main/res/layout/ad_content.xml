@@ -1,5 +1,4 @@
-<com.google.android.gms.ads.formats.NativeContentAdView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.gms.ads.formats.NativeContentAdView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#FFFFFF"
@@ -11,7 +10,7 @@
         android:layout_gravity="center"
         android:orientation="vertical">
 
-        <TextView style="@style/AppTheme.AdAttribution"/>
+        <TextView style="@style/AppTheme.AdAttribution" />
 
         <TextView
             android:id="@+id/contentad_headline"
@@ -26,15 +25,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:orientation="horizontal" >
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.35"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/contentad_image"
@@ -42,8 +41,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="8dp"
-                    android:maxHeight="100dp"
-                    android:adjustViewBounds="true" />
+                    android:adjustViewBounds="true"
+                    android:maxHeight="100dp" />
 
                 <TextView
                     android:id="@+id/contentad_call_to_action"

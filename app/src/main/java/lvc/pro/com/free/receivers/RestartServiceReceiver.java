@@ -13,8 +13,7 @@ import lvc.pro.com.free.service.CallDetectionService;
  * Created by ibtisam on 8/4/2017.
  */
 
-public class RestartServiceReceiver extends BroadcastReceiver
-{
+public class RestartServiceReceiver extends BroadcastReceiver {
 
     private static final String TAG = "AutoRestartApp";
 

@@ -30,7 +30,7 @@ public class Splash_Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Constants.sIS_FROM_ANOTHER_ACTIVITY=true;
+        Constants.sIS_FROM_ANOTHER_ACTIVITY = true;
         Fabric.with(this, new Crashlytics());
         SharedPreferences SP1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         boolean b1 = SP1.getBoolean("LOCK", false);

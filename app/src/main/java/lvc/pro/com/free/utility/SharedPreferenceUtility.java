@@ -16,7 +16,7 @@ public class SharedPreferenceUtility {
     private static SharedPreferences.Editor mEditor;
 
     public static void initSharedPreferences(Context pContext) {
-       mSharedPreferences = pContext.getSharedPreferences(Constants.sSHARED_PREFERENCES, Context.MODE_PRIVATE);
+        mSharedPreferences = pContext.getSharedPreferences(Constants.sSHARED_PREFERENCES, Context.MODE_PRIVATE);
     }
 
     public static void initSharedPreferencesEditor(Context pContext) {
@@ -41,25 +41,23 @@ public class SharedPreferenceUtility {
         return mSharedPreferences.getBoolean(Constants.sKEY_FOR_PROTECTED_MODE, false);
 
     }
-    public static void setBackgroundStatus(Context pContext,boolean pStatus)
-    {
-        if(mEditor==null)
-        {
+
+    public static void setBackgroundStatus(Context pContext, boolean pStatus) {
+        if (mEditor == null) {
             initSharedPreferencesEditor(pContext);
         }
-        mEditor.putBoolean(Constants.sKEY_FOR_BACKGROUND_STATUS,pStatus);
+        mEditor.putBoolean(Constants.sKEY_FOR_BACKGROUND_STATUS, pStatus);
         mEditor.commit();
     }
-    public static boolean getBackgroundStatus(Context pContext)
-    {
-        if(mSharedPreferences==null)
-        {
+
+    public static boolean getBackgroundStatus(Context pContext) {
+        if (mSharedPreferences == null) {
             initSharedPreferencesEditor(pContext);
         }
-        return mSharedPreferences.getBoolean(Constants.sKEY_FOR_BACKGROUND_STATUS,false);
+        return mSharedPreferences.getBoolean(Constants.sKEY_FOR_BACKGROUND_STATUS, false);
     }
-    public static boolean getLockActivatedStatus(Context pContext)
-    {
+
+    public static boolean getLockActivatedStatus(Context pContext) {
         SharedPreferences SP1 = PreferenceManager.getDefaultSharedPreferences(pContext);
         return SP1.getBoolean("LOCK", false);
     }

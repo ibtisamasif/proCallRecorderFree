@@ -14,7 +14,6 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
-
 android {
     compileSdkVersion 26
     buildToolsVersion '26.0.1'
@@ -22,8 +21,8 @@ android {
         applicationId "com.callrecorder.freecallrecorder"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 12   //12 is in production
-        versionName '1.8' //1.8 is in production
+        versionCode 13   //12 is in production
+        versionName '1.9' //1.8 is in production
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

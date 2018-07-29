@@ -6,41 +6,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.callrecorder.free.R;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.NativeExpressAdView;
-import com.google.android.gms.ads.VideoController;
-import com.google.android.gms.ads.VideoOptions;
-import com.google.android.gms.ads.formats.MediaView;
-import com.google.android.gms.ads.formats.NativeAd;
-import com.google.android.gms.ads.formats.NativeAdOptions;
-import com.google.android.gms.ads.formats.NativeAppInstallAd;
-import com.google.android.gms.ads.formats.NativeAppInstallAdView;
-import com.google.android.gms.ads.formats.NativeContentAd;
-import com.google.android.gms.ads.formats.NativeContentAdView;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 import lvc.pro.com.free.constants.Constants;
-import lvc.pro.com.free.utility.CommonUtility;
 import lvc.pro.com.free.utility.SharedPreferenceUtility;
 
 import static lvc.pro.com.free.contacts.ContactProvider.getFolderPath;

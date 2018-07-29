@@ -7,15 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -25,15 +22,12 @@ import com.callrecorder.free.R;
 import net.rdrei.android.dirchooser.DirectoryChooserActivity;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 
-import java.util.List;
-
 import lvc.pro.com.free.constants.Constants;
-import lvc.pro.com.free.utility.CommonUtility;
 import lvc.pro.com.free.utility.SharedPreferenceUtility;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
     static Context ctx;
-    public static boolean mIsDestroying=false;
+    public static boolean mIsDestroying = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,11 +127,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             savingOptions.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object o) {
-                        if (o.toString().equals("1")) {
-                            MainActivity.mMainActivityInstance.setRecorderState(false);
-                        } else {
-                            MainActivity.mMainActivityInstance.setRecorderState(true);
-                        }
+                    if (o.toString().equals("1")) {
+                        MainActivity.mMainActivityInstance.setRecorderState(false);
+                    } else {
+                        MainActivity.mMainActivityInstance.setRecorderState(true);
+                    }
 
                     return true;
                 }
@@ -165,7 +159,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        mIsDestroying=true;
+        mIsDestroying = true;
         SharedPreferenceUtility.setBackgroundStatus(getApplicationContext(), true);
     }
 
@@ -180,7 +174,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             }
         }
         Constants.sIS_FROM_ANOTHER_ACTIVITY = false;
-        mIsDestroying=false;
+        mIsDestroying = false;
     }
 
     @Override

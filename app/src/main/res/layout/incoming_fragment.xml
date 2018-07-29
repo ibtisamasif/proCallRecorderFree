@@ -30,8 +30,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:textAppearance="@android:style/TextAppearance.Material.Button"
                 android:text="@string/no_records_message"
+                android:textAppearance="@android:style/TextAppearance.Material.Button"
                 android:textColor="@color/secondary_text"
                 android:textSize="20sp"
                 tools:targetApi="lollipop" />

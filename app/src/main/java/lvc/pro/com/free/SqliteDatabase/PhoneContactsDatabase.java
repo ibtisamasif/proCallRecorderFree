@@ -16,27 +16,29 @@ import lvc.pro.com.free.pojo_classes.Contacts;
  * Created by LVC on 05-Sep-17.
  */
 
-public class PhoneContactsDatabase extends SQLiteOpenHelper{
+public class PhoneContactsDatabase extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "contacts";
     private static final String TABLE_PHONE_CONTACTS = "phonecontacts";
     //table coloumn fields
     private static final String KEY_ID = "id";
     private static final String KEY_PH_NO = "phone_number";
-    private static  final String KEY_NAME="name";
-    private  static final String KEY_PHOTOURI="photo";
+    private static final String KEY_NAME = "name";
+    private static final String KEY_PHOTOURI = "photo";
 
     public PhoneContactsDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_PHONE_CONTACTS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_PH_NO + " TEXT, "+KEY_NAME+" TEXT , "
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_PH_NO + " TEXT, " + KEY_NAME + " TEXT , "
                 + KEY_PHOTOURI + " TEXT" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
+
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -45,13 +47,14 @@ public class PhoneContactsDatabase extends SQLiteOpenHelper{
         // Create tables again
         onCreate(db);
     }
+
     //All Crud Information
     public void addContact(Contacts contact) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_PH_NO, contact.getNumber());
-        values.put(KEY_NAME,contact.getName());
-        values.put(KEY_PHOTOURI,contact.getPhotoUri());
+        values.put(KEY_NAME, contact.getName());
+        values.put(KEY_PHOTOURI, contact.getPhotoUri());
         // Inserting Row
         db.insert(TABLE_PHONE_CONTACTS, null, values);
         db.close(); // Closing database connection
@@ -61,7 +64,7 @@ public class PhoneContactsDatabase extends SQLiteOpenHelper{
         ArrayList<Contacts> contactList = new ArrayList<Contacts>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_PHONE_CONTACTS;
-        try{
+        try {
             SQLiteDatabase db = this.getWritableDatabase();
             Cursor cursor = db.rawQuery(selectQuery, null);
             // looping through all rows and adding to list
@@ -79,7 +82,7 @@ public class PhoneContactsDatabase extends SQLiteOpenHelper{
             // return contact list
             db.close();
             cursor.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return contactList;
@@ -90,23 +93,23 @@ public class PhoneContactsDatabase extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_PH_NO, contact.getNumber());
-        values.put(KEY_NAME,contact.getName());
-        values.put(KEY_PHOTOURI,contact.getPhotoUri().toString());
+        values.put(KEY_NAME, contact.getName());
+        values.put(KEY_PHOTOURI, contact.getPhotoUri().toString());
         // updating row
-        Log.d("id",String.valueOf(contact.getNumber()));
+        Log.d("id", String.valueOf(contact.getNumber()));
 //        db.close();
         return db.update(TABLE_PHONE_CONTACTS, values, KEY_PH_NO + " = ?",
-                new String[] { String.valueOf(contact.getNumber()) });
+                new String[]{String.valueOf(contact.getNumber())});
     }
 
     public Contacts isContact(String number) {
         SQLiteDatabase db = this.getReadableDatabase();
         Contacts contact = new Contacts();
-        String selectQuery = "SELECT  * FROM " + TABLE_PHONE_CONTACTS +" WHERE "+KEY_PH_NO+" = '"+number+"'";
+        String selectQuery = "SELECT  * FROM " + TABLE_PHONE_CONTACTS + " WHERE " + KEY_PH_NO + " = '" + number + "'";
         Cursor cursor = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
         //test this
-        try{
+        try {
             if (cursor.moveToFirst()) {
                 do {
                     contact.setId(Integer.parseInt(cursor.getString(0)));
@@ -114,9 +117,9 @@ public class PhoneContactsDatabase extends SQLiteOpenHelper{
                     // Adding contact to list
                 } while (cursor.moveToNext());
             }
-        }catch (SQLiteCantOpenDatabaseException exception){
-            Log.d("SQL",exception.toString());
-            return  null;
+        } catch (SQLiteCantOpenDatabaseException exception) {
+            Log.d("SQL", exception.toString());
+            return null;
         }
         // return contact list
         db.close();

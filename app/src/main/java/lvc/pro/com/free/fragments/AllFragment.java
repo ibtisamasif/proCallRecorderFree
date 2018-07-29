@@ -132,14 +132,18 @@ public class AllFragment extends Fragment implements MainActivity.refreshstener,
                             }
                         }
                     } else {
-                        if (realrecordingcontacts.get(position) instanceof Contacts) {
-                            Contacts contacts = (Contacts) realrecordingcontacts.get(position);
-                            String records = ContactProvider.getRecordingNameByContactAndType(view.getContext(), recordingNameList, "", contacts);
-                            if (Build.VERSION.SDK_INT > 18) {
-                                ContactProvider.openMaterialSheetDialog(getLayoutInflater(), position, records, StringUtils.prepareContacts(ctx, contacts.getNumber()));
-                            } else {
-                                ContactProvider.showDialog(view.getContext(), records, contacts);
+                        try {
+                            if (realrecordingcontacts.get(position) instanceof Contacts) { //TODO crash here
+                                Contacts contacts = (Contacts) realrecordingcontacts.get(position);
+                                String records = ContactProvider.getRecordingNameByContactAndType(view.getContext(), recordingNameList, "", contacts);
+                                if (Build.VERSION.SDK_INT > 18) {
+                                    ContactProvider.openMaterialSheetDialog(getLayoutInflater(), position, records, StringUtils.prepareContacts(ctx, contacts.getNumber()));
+                                } else {
+                                    ContactProvider.showDialog(view.getContext(), records, contacts);
+                                }
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
                     ContactProvider.setItemrefresh(new ContactProvider.refresh() {
@@ -149,7 +153,6 @@ public class AllFragment extends Fragment implements MainActivity.refreshstener,
                                 showContacts();
                         }
                     });
-
                 }
             }
 
@@ -166,7 +169,6 @@ public class AllFragment extends Fragment implements MainActivity.refreshstener,
                         ((MainActivity) getActivity()).mActionMode = actionMode;
                     }
                 }
-
                 multiSelect(position);
             }
         }));
@@ -333,8 +335,8 @@ public class AllFragment extends Fragment implements MainActivity.refreshstener,
         if (!recordedContacts.isEmpty()) {
             recordedContacts.clear();
         }
-    //crash    recordedContacts = ContactProvider.getCallList(getContext(), recordingNameList, "");
-        if(getContext()!=null) {
+        //crash    recordedContacts = ContactProvider.getCallList(getContext(), recordingNameList, "");
+        if (getContext() != null) {
             recordedContacts = ContactProvider.getCallList(getContext(), recordingNameList, "");
         }
         for (Contacts contacts : recordedContacts) {
@@ -604,7 +606,7 @@ public class AllFragment extends Fragment implements MainActivity.refreshstener,
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(" FRAGMENT "+AllFragment.class.getSimpleName()," refresh ");
+        Log.d(" FRAGMENT " + AllFragment.class.getSimpleName(), " refresh ");
         refreshItems();
     }
    /* public  class RefreshAllFragmentAsyncTask extends AsyncTask<Void, Integer, Void>{
