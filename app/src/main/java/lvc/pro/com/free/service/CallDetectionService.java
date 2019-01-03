@@ -29,10 +29,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
-import lvc.pro.com.free.MainActivity;
 import lvc.pro.com.free.Splash_Activity;
 import lvc.pro.com.free.SqliteDatabase.DatabaseHelper;
-import lvc.pro.com.free.constants.Constants;
 import lvc.pro.com.free.contacts.ContactProvider;
 import lvc.pro.com.free.pojo_classes.Contacts;
 import lvc.pro.com.free.utils.StringUtils;
@@ -50,7 +48,7 @@ public class CallDetectionService extends Service {
     private static Date callStartTime;
     private static boolean isIncoming;
     private static String savedNumber;  //because the passed incoming is only valid in ringing
-    static MediaRecorder recorder = new MediaRecorder();
+    static MediaRecorder mediaRecorder = new MediaRecorder();
     static AudioManager audioManager;
     static File audiofile;
     //    Context context;
@@ -150,13 +148,11 @@ public class CallDetectionService extends Service {
                     isIncoming = false;
                     callStartTime = new Date();
                     onOutgoingCallStarted(context, savedNumber, callStartTime);
-//
                 } else {
                     isIncoming = true;
                     callStartTime = new Date();
                     onIncomingCallAnswered(context, savedNumber, callStartTime);
                 }
-
                 break;
             case TelephonyManager.CALL_STATE_IDLE:
                 //call ended
@@ -251,11 +247,6 @@ public class CallDetectionService extends Service {
             record = false;
             return;
         }
-        int source = Integer.parseInt(SP.getString("RECORDER", "2"));
-        Log.d(TAG, " source value: " + source);
-        // default value is 0 for call recording so as to record high quality call by default
-        int recordingQuality = Integer.parseInt(SP.getString(context.getString(R.string.shared_pref_recording_quality_pref_key), "0"));
-        Log.d(TAG, " recording quality " + recordingQuality);
         File sampleDir;
         String dir = ContactProvider.getFolderPath(context);
         if (dir.isEmpty()) {
@@ -266,156 +257,107 @@ public class CallDetectionService extends Service {
         if (!sampleDir.exists()) {
             sampleDir.mkdirs();
         }
-        String file_name = name;
-        try {
-            switch (recordingQuality) {
-                case 0: {
-                    audiofile = File.createTempFile(file_name, ".m4a", sampleDir);
-                    break;
-                }
-                default:
-                    audiofile = File.createTempFile(file_name, ".3gpp", sampleDir);
-            }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        int source = Integer.parseInt(SP.getString("RECORDER", "1"));
+        Log.d(TAG, " source value: " + source);
         switch (source) {
             case 0:
                 try {
-                    recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                    mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                    audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+                    audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL), 0);
+//                    audioManager.setSpeakerphoneOn(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
             case 1:
                 try {
-                    recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-                    audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-                    audioManager.setStreamVolume(3, audioManager.getStreamMaxVolume(3), 0);
-                    audioManager.setSpeakerphoneOn(true);
+                    mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
             case 2:
                 try {
-                    recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION);
+                    mediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
             case 3:
                 try {
-                    recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_RECOGNITION);
+                    mediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_RECOGNITION);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
             case 4:
                 try {
-                    //recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_CALL);
-                    // recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                    //  mediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_CALL);
                     String manufacturer = Build.MANUFACTURER;
                     if (manufacturer.toLowerCase().contains("samsung")) {
-                        recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_RECOGNITION);
+                        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION);
                     } else {
-                        recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_CALL);
+                        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_CALL);
                     }
                 } catch (Exception e) {
-                    recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                    mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                    e.printStackTrace();
+                }
+                break;
+            case 5:
+                try {
+                    mediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
             default:
                 try {
-                    recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION);
+                    mediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
         }
+
+        // default value is 0 for call recording so as to record high quality call by default
+        int recordingQuality = Integer.parseInt(SP.getString(context.getString(R.string.shared_pref_recording_quality_pref_key), "0"));
+        Log.d(TAG, " recording quality " + recordingQuality);
+        String file_name = name;
         try {
             switch (recordingQuality) {
                 case 0: {
-                    Log.d(TAG, " recording quality code " + "0");
-                    recorder.setAudioSamplingRate(44000);
-                    recorder.setAudioEncodingBitRate(96000);
-                    break;
-                }
-                case 1: {
-                    Log.d(TAG, " recording quality code " + "1");
-                    recorder.setAudioSamplingRate(11000);
-                    recorder.setAudioEncodingBitRate(45000);
-                    break;
-                }
-                case 2: {
-                    Log.d(TAG, " recording quality code " + "2");
-                    recorder.setAudioSamplingRate(8000);
-                    recorder.setAudioEncodingBitRate(12200);
+                    Log.d(TAG, " recording quality code " + "high ");
+                    audiofile = File.createTempFile(file_name, ".m4a", sampleDir);
+//                    mediaRecorder.setAudioSamplingRate(44100);
+//                    mediaRecorder.setAudioEncodingBitRate(96000);
+                    mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+                    mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
                     break;
                 }
                 default:
                     Log.d(TAG, " recording quality code " + "default ");
-                    recorder.setAudioSamplingRate(8000);
-                    recorder.setAudioEncodingBitRate(12200);
+                    audiofile = File.createTempFile(file_name, ".3gp", sampleDir);
+//                    mediaRecorder.setAudioSamplingRate(44100);
+//                    mediaRecorder.setAudioEncodingBitRate(96000);
+                    mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+                    mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
             }
-
-        } catch (Exception e) {
+            Log.d(TAG, audiofile.getName());
+            //  audiofile = File.createTempFile(file_name, ".3gpp", sampleDir);
+        } catch (IOException e) {
             e.printStackTrace();
         }
-       /* try {
-            switch (recordingQuality) {
-                case 0: {
-                    recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-                    break;
-                }
-                default:
-                    recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-            }
-
-        } catch (Exception e) {
-            try {
-                recorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
-            } catch (Exception d) {
-                d.printStackTrace();
-            }
-        }*/
         try {
-            recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        } catch (Exception e) {
-            try {
-                recorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
-            } catch (Exception d) {
-                d.printStackTrace();
-            }
-        }
-       /* try {
-            switch (recordingQuality) {
-                case 0: {
-                    recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-                    break;
-                }
-                default:
-                    recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-        try {
-            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            mediaRecorder.setOutputFile(audiofile.getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            recorder.setOutputFile(audiofile.getAbsolutePath());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            recorder.prepare();
-            recorder.start();
+            mediaRecorder.prepare();
+            mediaRecorder.start();
             record = true;
         } catch (IllegalStateException e) {
             e.printStackTrace();
@@ -429,7 +371,7 @@ public class CallDetectionService extends Service {
     public void stopRecording() {
         if (record) {
             try {
-                recorder.stop();
+                mediaRecorder.stop();
             } catch (Exception e) {
                 e.printStackTrace();
             }
