@@ -15,7 +15,7 @@
         android:summary="Directory to store recording"
         android:title="Choose Directory" />
     <ListPreference
-        android:defaultValue="2"
+        android:defaultValue="1"
         android:entries="@array/pref_example_list_titles"
         android:entryValues="@array/pref_example_list_values"
         android:key="RECORDER"
