@@ -3,9 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.callrecorder.free">
 
-    <!--Protection level Highly dangerous-->
-    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
-    <!--Protection level dangerous-->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -154,11 +151,12 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="e2c9862bfc8212a8fe9f7315d401026dbbb03d48" />
-
         <activity
             android:name="lvc.pro.com.free.FAQActivity"
             android:label="@string/title_activity_faq"
             android:theme="@style/AppTheme"></activity>
+
+
     </application>
 
 </manifest>

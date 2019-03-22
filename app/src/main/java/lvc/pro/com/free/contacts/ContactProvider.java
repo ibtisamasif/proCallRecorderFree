@@ -105,6 +105,7 @@ public class ContactProvider {
                 }
             }
         }
+        if (cursor!=null)
         cursor.close();
         return list;
     }
@@ -165,7 +166,8 @@ public class ContactProvider {
             //incoming list
             recordedContacts.clear();
             for (String filename : recordingList) {
-                Log.d(TAG, "getCallList: filename: " + filename);
+                Log.d(TAG, "getCallList: filena." +
+                        "3333333me: " + filename);
                 String recordedfilearray[] = filename.split("__");      //recorded file_array
                 try {
                     String s = recordedfilearray[2];
@@ -323,7 +325,7 @@ public class ContactProvider {
                     if (StringUtils.prepareContacts(ctx, people.getNumber()).equalsIgnoreCase(recordedfilearray[0])) {
                         long timestamp = 1;
                         try {
-                            timestamp = new Long(recordedfilearray[1]).longValue();
+                            timestamp = Long.valueOf(recordedfilearray[1]);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             e.printStackTrace();
                             continue;
@@ -364,7 +366,7 @@ public class ContactProvider {
                     //no contact show them
                     long timestamp = 1;
                     try {
-                        timestamp = new Long(recordedfilearray[1]).longValue();
+                        timestamp = Long.valueOf(recordedfilearray[1]);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         e.printStackTrace();
                         continue;
@@ -830,8 +832,15 @@ public class ContactProvider {
     }
 
     public static String getFolderPath(Context context) {
-        SharedPreferences directorypreference = context.getSharedPreferences("DIRECTORY", Context.MODE_PRIVATE);
-        String s = directorypreference.getString("DIR", Environment.getExternalStorageDirectory().getAbsolutePath() + "/CallRecorder");
+        String s="";
+        if(context!=null){
+            SharedPreferences directorypreference = context.getSharedPreferences("DIRECTORY", Context.MODE_PRIVATE);
+
+            if (directorypreference!=null) {
+                s = directorypreference.getString("DIR", Environment.getExternalStorageDirectory().getAbsolutePath() + "/CallRecorder");
+            }
+            return s;
+        }
         return s;
     }
 

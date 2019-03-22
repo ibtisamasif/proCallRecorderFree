@@ -448,7 +448,8 @@ public class AllFragment extends Fragment implements MainActivity.refreshstener,
                     mSelectionMenu.findItem(R.id.action_share).setVisible(false);
                     getActivity().invalidateOptionsMenu();
                     selectedContactsTimeStamp = recyclerAdapter.selectAll();
-                    actionMode.setTitle(String.valueOf(selectedContactsTimeStamp.size())); //show selected item count on action mode.
+                    if (selectedContactsTimeStamp!=null){
+                    actionMode.setTitle(String.valueOf(selectedContactsTimeStamp.size()));} //show selected item count on action mode.
                 } else {
                     mSelectionMenu.findItem(R.id.action_share).setVisible(true);
                     getActivity().invalidateOptionsMenu();

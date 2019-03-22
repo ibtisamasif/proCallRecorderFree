@@ -56,7 +56,7 @@ public class Main2Activity extends AppCompatActivity {
         mediaPlayer = new MediaPlayer();
         try {
             mediaPlayer.reset();
-            mediaPlayer.setDataSource(getFolderPath(this) + "/" + path);
+            mediaPlayer.setDataSource(getFolderPath(Main2Activity.this) + "/" + path);
         } catch (IOException e) {
             e.printStackTrace();
         }

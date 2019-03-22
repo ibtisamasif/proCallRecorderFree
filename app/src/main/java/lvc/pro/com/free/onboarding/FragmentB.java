@@ -90,7 +90,7 @@ public class FragmentB extends Fragment {
         int storage = ContextCompat.checkSelfPermission(mContext, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);//
         int call = ContextCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE);//
         int read_phonestate = ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE);//
-        int process_outgoing_call = ContextCompat.checkSelfPermission(mContext, Manifest.permission.PROCESS_OUTGOING_CALLS);//
+//        int process_outgoing_call = ContextCompat.checkSelfPermission(mContext, Manifest.permission.PROCESS_OUTGOING_CALLS);//
         int read_contacts = ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_CONTACTS);//
         int readStorage = ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_EXTERNAL_STORAGE);//
         int modify_audio_setting = ContextCompat.checkSelfPermission(mContext, Manifest.permission.MODIFY_AUDIO_SETTINGS);//
@@ -104,9 +104,9 @@ public class FragmentB extends Fragment {
         if (modify_audio_setting != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.MODIFY_AUDIO_SETTINGS);
         }
-        if (process_outgoing_call != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.PROCESS_OUTGOING_CALLS);
-        }
+//        if (process_outgoing_call != PackageManager.PERMISSION_GRANTED) {
+//            listPermissionsNeeded.add(Manifest.permission.PROCESS_OUTGOING_CALLS);
+//        }
 
         if (read_phonestate != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);

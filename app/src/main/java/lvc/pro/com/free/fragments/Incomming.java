@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -119,10 +120,12 @@ public class Incomming extends Fragment implements MainActivity.refreshstener, A
             // Android version is lesser than 6.0 or the permission is already granted.
             showContacts();
         }
-        if (realrecordingcontacts.isEmpty()) {
-            message.setVisibility(View.VISIBLE);
-        } else {
-            message.setVisibility(View.GONE);
+        if (message != null) {
+            if (realrecordingcontacts.isEmpty()) {
+                message.setVisibility(View.VISIBLE);
+            } else {
+                message.setVisibility(View.GONE);
+            }
         }
         recyclerAdapter.setContacts(realrecordingcontacts); //fix this
 
@@ -130,7 +133,8 @@ public class Incomming extends Fragment implements MainActivity.refreshstener, A
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Log.d(TAG, "onItemClick: ");
+                //Log.d(TAG, "onItemClick: ");
+                //Log.v("mensu", String.valueOf(mensu));
                 if (isMultiSelect) {
                     //if multiple selection is enabled then select item on single click else perform normal click on item.
                     multiSelect(position);
@@ -146,6 +150,7 @@ public class Incomming extends Fragment implements MainActivity.refreshstener, A
                             }
                         }
                     } else {
+                        Log.e("onItemClick: ", String.valueOf(position));
                         if (realrecordingcontacts.get(position) instanceof Contacts) {
                             Contacts contacts = (Contacts) realrecordingcontacts.get(position);
                             String records = ContactProvider.getRecordingNameByContactAndType(view.getContext(), recordings, "IN", contacts);
@@ -239,10 +244,12 @@ public class Incomming extends Fragment implements MainActivity.refreshstener, A
 
                 } else {
                     mensu = false;
-                    if (realrecordingcontacts.isEmpty()) {
-                        message.setVisibility(View.VISIBLE);
-                    } else {
-                        message.setVisibility(View.GONE);
+                    if (message != null) {
+                        if (realrecordingcontacts.isEmpty()) {
+                            message.setVisibility(View.VISIBLE);
+                        } else {
+                            message.setVisibility(View.GONE);
+                        }
                     }
                     recyclerAdapter.setContacts(realrecordingcontacts);
                     recyclerAdapter.notifyDataSetChanged();
@@ -279,13 +286,17 @@ public class Incomming extends Fragment implements MainActivity.refreshstener, A
     public void refreshItems() {
         recordings = ContactProvider.showAllRecordedlistfiles(ctx);
         showContacts();
-        if (realrecordingcontacts.isEmpty()) {
-            message.setVisibility(View.VISIBLE);
-        } else {
-            message.setVisibility(View.GONE);
+        if (message != null) {
+            if (realrecordingcontacts.isEmpty()) {
+                message.setVisibility(View.VISIBLE);
+            } else {
+                message.setVisibility(View.GONE);
+            }
         }
-        recyclerAdapter.setContacts(realrecordingcontacts);
-        recyclerAdapter.notifyDataSetChanged();
+        if (recyclerAdapter != null) {
+            recyclerAdapter.setContacts(realrecordingcontacts);
+            recyclerAdapter.notifyDataSetChanged();
+        }
         MainActivity.fetchSearchRecords();
     }
 
@@ -354,20 +365,27 @@ public class Incomming extends Fragment implements MainActivity.refreshstener, A
             }
             realrecordingcontacts.add(date);
         }
-        if (realrecordingcontacts.isEmpty()) {
-            message.setVisibility(View.VISIBLE);
-        } else {
-            message.setVisibility(View.GONE);
+        if (message != null) {
+            if (realrecordingcontacts.isEmpty()) {
+                message.setVisibility(View.VISIBLE);
+            } else {
+                message.setVisibility(View.GONE);
+            }
         }
-        recyclerAdapter.notifyDataSetChanged();
-        if (swipeRefreshLayout.isRefreshing()) {
-            swipeRefreshLayout.setRefreshing(false);
-            Toast.makeText(ctx, ctx.getString(R.string.records_refreshed), Toast.LENGTH_SHORT).show();
+        if (recyclerAdapter != null) {
+            recyclerAdapter.notifyDataSetChanged();
+        }
+        if (swipeRefreshLayout != null) {
+            if (swipeRefreshLayout.isRefreshing()) {
+                swipeRefreshLayout.setRefreshing(false);
+                Toast.makeText(ctx, ctx.getString(R.string.records_refreshed), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
     private ArrayList<Contacts> sorts(ArrayList<Contacts> contactses) {
         Collections.sort(contactses);
+        Log.v("contactses", String.valueOf(contactses.size()));
         return contactses;
     }
 
@@ -573,7 +591,14 @@ public class Incomming extends Fragment implements MainActivity.refreshstener, A
     public void onResume() {
         super.onResume();
         Log.d(" FRAGMENT " + Incomming.class.getSimpleName(), " refresh ");
-        refreshItems();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                refreshItems();
+
+            }
+        }, 500);
     }
 
     @Override

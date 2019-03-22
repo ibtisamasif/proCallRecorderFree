@@ -21,8 +21,8 @@ android {
         applicationId "com.callrecorder.freecallrecorder"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 17
-        versionName '2.1'
+        versionCode 23
+        versionName '2.7'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -59,7 +59,7 @@ dependencies {
     implementation 'com.chaos.view:pinview:1.1.0'
 //    implementation 'com.facebook.android:facebook-android-sdk:4.27.0'
     testImplementation 'junit:junit:4.12'
-
+    implementation 'com.writingminds:FFmpegAndroid:0.3.2'
     implementation 'com.google.android.gms:play-services-drive:11.8.0'
     implementation 'com.google.android.gms:play-services-auth:11.8.0'
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') {
